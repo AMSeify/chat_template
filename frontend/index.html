@@ -3,11 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LLM Chat Demo</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <title>LLM Chat Demo</title>    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <style>
+      pre code {
+        background: #2a2b32;
+        padding: 1rem;
+        border-radius: 6px;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+        font-size: 1.1em;
+        line-height: 1.5;
+      }
+    </style>
+    <script>
+      // Initialize Mermaid immediately
+      if (window.mermaid) {
+        try {
+          mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose'
+          });
+        } catch (e) {
+          console.error('Error initializing Mermaid:', e);
+        }
+      }
+
+      // Function to render math expressions using KaTeX
+      function renderMathBlocks() {
+        document.querySelectorAll('.math-block').forEach(block => {
+          try {
+            katex.render(block.textContent, block, {
+              throwOnError: false,
+              displayMode: true,
+              output: 'html',
+              strict: false
+            });
+          } catch (e) {
+            console.error('KaTeX rendering error:', e);
+          }
+        });
+      }
+
+      // Observe DOM changes to render math in new content
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.addedNodes.length) {
+            renderMathBlocks();
+          }
+        });
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

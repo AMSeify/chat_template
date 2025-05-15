@@ -49,7 +49,13 @@ async def stream_llm_response(prompt: str = Query(...)):
             ],
             "layout": {"title": "Simple Line Chart", "height": 300}
         }
-        flowchart = """```mermaid\nflowchart LR\n    A[Idea] --> B{Plan?}\n    B -->|Yes| C[Execute]\n    B -->|No| A\n    C --> D[Done]\n```"""
+        flowchart = """```mermaid
+graph TD
+    A[Start] --> B{Is it working?}
+    B -->|Yes| C[Great!]
+    B -->|No| D[Debug]
+    D --> B
+```"""
         datatables_table_config = {
             "data": [
                 {"name":"Oli Bob", "age":"12", "city":"London", "progress":50, "gender":"male"},
@@ -101,10 +107,11 @@ async def stream_llm_response(prompt: str = Query(...)):
                 "Here's a standard markdown list:\n\n",
                 "- First item\n- Second item\n- Third item\n\n",
                 "And a simple **bold** and *italic* text example.\n\n",
-                "## Math Rendering\n\n",
-                "Inline math: The quadratic formula is $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$.\n\n",
-                "Display math:\n\n",
-                "$$\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}$$\n\n",
+                "## Math Equations\n\n",
+                "Here's the quadratic formula:\n\n",
+                "```\nx = (-b ± √(b² - 4ac)) / 2a\n```\n\n",
+                "The Gaussian integral:\n\n",
+                "```\n∫_{-∞}^∞ e^{-x²} dx = √π\n```\n\n",
                 "## Plotly Chart\n\n",
                 "Here is an embedded interactive line chart:\n\n",
                 "```plotly\n" + json.dumps(line_chart) + "\n```\n\n",
@@ -133,12 +140,24 @@ async def stream_llm_response(prompt: str = Query(...)):
             ]
         elif "math" in prompt_lower:
             response_chunks = [
-                "# Math Rendering Example\n\n",
-                "You can include inline math like $E = mc^2$ or display equations:\n\n",
-                "$$\\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n",
-                "More complex examples:\n\n",
-                "$$\\begin{aligned}\n\\nabla \\times \\vec{\\mathbf{B}} -\\, \\frac{1}{c}\\, \\frac{\\partial\\vec{\\mathbf{E}}}{\\partial t} & = \\frac{4\\pi}{c}\\vec{\\mathbf{j}} \\\\n\\nabla \\cdot \\vec{\\mathbf{E}} & = 4 \\pi \\rho \\\\n\\nabla \\times \\vec{\\mathbf{E}}\\, +\\, \\frac{1}{c}\\, \\frac{\\partial\\vec{\\mathbf{B}}}{\\partial t} & = \\vec{\\mathbf{0}} \\\\n\\nabla \\cdot \\vec{\\mathbf{B}} & = 0\\end{aligned}$$\n\n",
-                "You can also include inline math within text explanations: If $\\alpha > \\beta$ then we need to recalculate $\\gamma = \\frac{\\alpha - \\beta}{2}$ to balance the equation."
+                "# Math Examples\n\n",
+                "Here are some mathematical expressions using Unicode characters:\n\n",
+                "## Simple Equations\n\n",
+                "The quadratic formula:\n```\nx = (-b ± √(b² - 4ac)) / 2a\n```\n\n",
+                "Pythagoras theorem:\n```\na² + b² = c²\n```\n\n",
+                "## Complex Equations\n\n",
+                "Maxwell's Equations:\n```\n∇ × B - (1/c)(∂E/∂t) = (4π/c)j\n∇ · E = 4πρ\n∇ × E + (1/c)(∂B/∂t) = 0\n∇ · B = 0\n```\n\n",
+                "Using Unicode symbols in text:\n\n",
+                "- α (alpha), β (beta), γ (gamma)\n",
+                "- ± (plus-minus)\n",
+                "- × (multiplication)\n",
+                "- ÷ (division)\n",
+                "- → (arrow)\n",
+                "- ∞ (infinity)\n",
+                "- ∫ (integral)\n",
+                "- ∑ (sum)\n",
+                "- ∏ (product)\n\n",
+                "You can write simple equations like E = mc² directly in text.\n"
             ]
         elif "chart" in prompt_lower:
             line_chart_full = {

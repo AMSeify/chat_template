@@ -25,9 +25,21 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  place-items: initial;
   min-width: 320px;
   min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  background: #343541;
+  color: #ececf1;
+  font-family: 'Inter', Arial, sans-serif;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  background: #343541;
 }
 
 h1 {
@@ -52,6 +64,95 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Dark mode styles for DataTables */
+.dataTables_wrapper {
+    color: #c5c5d2 !important;
+    background: #343541 !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+}
+
+table.dataTable {
+    background-color: #2a2b32 !important;
+    color: #c5c5d2 !important;
+    border-collapse: collapse !important;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+    background-color: #444654 !important;
+    color: #ececf1 !important;
+    border-bottom: 2px solid #555 !important;
+    padding: 10px 18px !important;
+}
+
+table.dataTable tbody tr {
+    background-color: #2a2b32 !important;
+    color: #c5c5d2 !important; /* Ensure text color is dark enough */
+}
+
+table.dataTable tbody tr td {
+    color: #c5c5d2 !important; /* Explicitly set text color for table data cells */
+}
+
+table.dataTable tbody tr:hover {
+    background-color: #383942 !important;
+}
+
+table.dataTable.stripe tbody tr.odd {
+    background-color: #343541 !important;
+}
+
+.dataTables_info,
+.dataTables_length,
+.dataTables_filter {
+    color: #c5c5d2 !important;
+    margin: 8px 0 !important;
+}
+
+.dataTables_filter input,
+.dataTables_length select {
+    background-color: #40414f !important;
+    color: #ececf1 !important;
+    border: 1px solid #555 !important;
+    border-radius: 4px !important;
+    padding: 4px 8px !important;
+    margin: 0 4px !important;
+}
+
+.dataTables_paginate {
+    color: #c5c5d2 !important;
+    margin: 8px 0 !important;
+}
+
+.dataTables_paginate .paginate_button {
+    background-color: #40414f !important;
+    color: #c5c5d2 !important;
+    border: 1px solid #555 !important;
+    border-radius: 4px !important;
+    padding: 6px 12px !important;
+    margin: 0 2px !important;
+}
+
+.dataTables_paginate .paginate_button:hover {
+    background-color: #565869 !important;
+    color: #fff !important;
+}
+
+.dataTables_paginate .paginate_button.current,
+.dataTables_paginate .paginate_button.current:hover {
+    background-color: #19c37d !important;
+    color: #fff !important;
+    border-color: #19c37d !important;
+}
+
+.dataTables_paginate .paginate_button.disabled {
+    background-color: #2a2b32 !important;
+    color: #666 !important;
+    border-color: #444 !important;
+    cursor: not-allowed !important;
 }
 
 @media (prefers-color-scheme: light) {
