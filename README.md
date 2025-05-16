@@ -16,7 +16,7 @@ A simple React + Flask LLM chat template.
 
 ## Setup
 
-### Backend (Flask)
+### Backend (FastAPI)
 1. Create a virtual environment and activate it:
    ```sh
    python3 -m venv venv
@@ -28,7 +28,7 @@ A simple React + Flask LLM chat template.
    ```
 3. Run the backend:
    ```sh
-   python main.py
+   unicorn main:app --reload
    ```
 
 ### Frontend (React)
